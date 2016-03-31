@@ -1,0 +1,146 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content:center;
+	align-items:center;
+}
+
+.trigger {
+	display: none;
+}
+
+.slider_group {
+	position: relative;
+	width: 500px;
+	height: 300px;
+	overflow: hidden;
+}
+
+.switch {
+	bottom: 0;
+	position: absolute;
+	background: #777;
+	color: #fff;
+	display: none;
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none;   /* Chrome/Safari/Opera */
+	-khtml-user-select: none;    /* Konqueror */
+	-moz-user-select: none;      /* Firefox */
+	-ms-user-select: none;       /* IE/Edge */
+	user-select: none;
+}
+
+.slide {
+	list-style: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: -100%;
+	right: auto;
+	transition: all 1s ease;
+}
+
+.trigger01:checked ~ .slider_group .slide01 {
+	left: 0;
+	right: 0;
+	transition: all 1s ease;
+}
+.trigger01:checked ~ .slider_group .slide02 {
+	left: auto;
+	right: -100%;
+	transition: all 1s ease;
+}
+.trigger01:checked ~ .slider_group .switch05 {
+	display: block;
+	left: 0;
+}
+.trigger01:checked ~ .slider_group .switch02 {
+	display: block;
+	right: 0;
+}
+
+.trigger02:checked ~ .slider_group .slide02 {
+	left: 0;
+	right: 0;
+	transition: all 1s ease;
+}
+.trigger02:checked ~ .slider_group .slide03 {
+	left: auto;
+	right: -100%;
+	transition: all 1s ease;
+}
+.trigger02:checked ~ .slider_group .switch01 {
+	display: block;
+	left: 0;
+}
+.trigger02:checked ~ .slider_group .switch03 {
+	display: block;
+	right: 0;
+}
+
+.trigger03:checked ~ .slider_group .slide03 {
+	left: 0;
+	right: 0;
+	transition: all 1s ease;
+}
+.trigger03:checked ~ .slider_group .slide04 {
+	left: auto;
+	right: -100%;
+	transition: all 1s ease;
+}
+.trigger03:checked ~ .slider_group .switch02 {
+	display: block;
+	left: 0;
+}
+.trigger03:checked ~ .slider_group .switch04 {
+	display: block;
+	right: 0;
+}
+
+.trigger04:checked ~ .slider_group .slide04 {
+	left: 0;
+	right: 0;
+	transition: all 1s ease;
+}
+.trigger04:checked ~ .slider_group .slide05 {
+	left: auto;
+	right: -100%;
+	transition: all 1s ease;
+}
+.trigger04:checked ~ .slider_group .switch03 {
+	display: block;
+	left: 0;
+}
+.trigger04:checked ~ .slider_group .switch05 {
+	display: block;
+	right: 0;
+}
+
+.trigger05:checked ~ .slider_group .slide05 {
+	left: 0;
+	right: 0;
+	transition: all 1s ease;
+}
+.trigger05:checked ~ .slider_group .slide01 {
+	left: auto;
+	right: -100%;
+	transition: all 1s ease;
+}
+.trigger05:checked ~ .slider_group .switch04 {
+	display: block;
+	left: 0;
+}
+.trigger05:checked ~ .slider_group .switch01 {
+	display: block;
+	right: 0;
+}
+
+.image {
+
+}
