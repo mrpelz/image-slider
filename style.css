@@ -9,6 +9,19 @@ body {
 	display: flex;
 	justify-content:center;
 	align-items:center;
+	font-family: sans-serif;
+}
+
+@keyframes unhide {
+	0% {
+		opacity: 1;
+	}
+	99.999% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 0;
+	}
 }
 
 .trigger {
@@ -22,18 +35,21 @@ body {
 	overflow: hidden;
 }
 
-.switch {
-	bottom: 0;
+.label {
 	position: absolute;
-	background: #777;
+	top: 50%;
+	transform: translateY(-50%);
+	background: #000;
 	color: #fff;
-	display: none;
-	-webkit-touch-callout: none; /* iOS Safari */
-	-webkit-user-select: none;   /* Chrome/Safari/Opera */
-	-khtml-user-select: none;    /* Konqueror */
-	-moz-user-select: none;      /* Firefox */
-	-ms-user-select: none;       /* IE/Edge */
+	padding: 2%;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 	user-select: none;
+	z-index: 2;
+	-webkit-font-smoothing: subpixel-antialiased;
 }
 
 .slide {
@@ -41,104 +57,30 @@ body {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	left: -100%;
-	right: auto;
-	transition: all 1s ease;
+	transform: translateX(-100%);
+	pointer-events: none;
+	transition: transform 0.35s ease-out;
+	z-index: -1;
 }
 
-.trigger01:checked ~ .slider_group .slide01 {
-	left: 0;
-	right: 0;
-	transition: all 1s ease;
+.trigger:checked + .label {
+	transform: translateX(-100%);
 }
-.trigger01:checked ~ .slider_group .slide02 {
-	left: auto;
-	right: -100%;
-	transition: all 1s ease;
+.trigger:checked + .label + .slide {
+	transform: translateX(0);
+	pointer-events: all;
+	z-index: 1;
 }
-.trigger01:checked ~ .slider_group .switch05 {
-	display: block;
-	left: 0;
-}
-.trigger01:checked ~ .slider_group .switch02 {
-	display: block;
+.trigger:checked + .label + .slide + .trigger + .label {
 	right: 0;
 }
-
-.trigger02:checked ~ .slider_group .slide02 {
-	left: 0;
+.trigger:checked + .label + .slide + .trigger ~ .slide {
+	transform: translateX(100%);
+	z-index: -2;
+}
+.trigger:checked + .label + .slide + .trigger + .label + .slide + .trigger ~ .label {
 	right: 0;
-	transition: all 1s ease;
-}
-.trigger02:checked ~ .slider_group .slide03 {
-	left: auto;
-	right: -100%;
-	transition: all 1s ease;
-}
-.trigger02:checked ~ .slider_group .switch01 {
-	display: block;
-	left: 0;
-}
-.trigger02:checked ~ .slider_group .switch03 {
-	display: block;
-	right: 0;
-}
-
-.trigger03:checked ~ .slider_group .slide03 {
-	left: 0;
-	right: 0;
-	transition: all 1s ease;
-}
-.trigger03:checked ~ .slider_group .slide04 {
-	left: auto;
-	right: -100%;
-	transition: all 1s ease;
-}
-.trigger03:checked ~ .slider_group .switch02 {
-	display: block;
-	left: 0;
-}
-.trigger03:checked ~ .slider_group .switch04 {
-	display: block;
-	right: 0;
-}
-
-.trigger04:checked ~ .slider_group .slide04 {
-	left: 0;
-	right: 0;
-	transition: all 1s ease;
-}
-.trigger04:checked ~ .slider_group .slide05 {
-	left: auto;
-	right: -100%;
-	transition: all 1s ease;
-}
-.trigger04:checked ~ .slider_group .switch03 {
-	display: block;
-	left: 0;
-}
-.trigger04:checked ~ .slider_group .switch05 {
-	display: block;
-	right: 0;
-}
-
-.trigger05:checked ~ .slider_group .slide05 {
-	left: 0;
-	right: 0;
-	transition: all 1s ease;
-}
-.trigger05:checked ~ .slider_group .slide01 {
-	left: auto;
-	right: -100%;
-	transition: all 1s ease;
-}
-.trigger05:checked ~ .slider_group .switch04 {
-	display: block;
-	left: 0;
-}
-.trigger05:checked ~ .slider_group .switch01 {
-	display: block;
-	right: 0;
+	transform: translateX(100%);
 }
 
 .image {
