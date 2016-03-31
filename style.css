@@ -12,18 +12,6 @@ body {
 	font-family: sans-serif;
 }
 
-@keyframes unhide {
-	0% {
-		opacity: 1;
-	}
-	99.999% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 0;
-	}
-}
-
 .trigger {
 	display: none;
 }
@@ -81,8 +69,4 @@ body {
 .trigger:checked + .label + .slide + .trigger + .label + .slide + .trigger ~ .label {
 	right: 0;
 	transform: translateX(100%);
-}
-
-.image {
-
 }
