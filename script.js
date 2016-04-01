@@ -1,58 +1,50 @@
 document.addEventListener('DOMContentLoaded', function () {
-	var debug				= true, // Set to true to enable debug-output.
-		sliderGroup			= document.querySelector('.slider_group'),
-		sliderGroupRect		= sliderGroup.getBoundingClientRect(),
-		sliderGroupWidth	= sliderGroup.offsetWidth,
-		triggers			= sliderGroup.querySelectorAll('.trigger'),
-		slides				= sliderGroup.querySelectorAll('.slide'),
-		activeTriggerIndex	= function(callback) {
-			triggers.forEach(function(element, index) {
-				element.checked && callback(index);
-			});
+	var sliderGroup				= document.querySelector('.slider_group'),
+		sliderGroupRect			= sliderGroup.getBoundingClientRect(),
+		sliderGroupWidth		= sliderGroup.offsetWidth,
+		triggers				= sliderGroup.querySelectorAll('.trigger'),
+		slides					= sliderGroup.querySelectorAll('.slide'),
+		activeTriggerIndex		= 0,
+		getActiveTriggerIndex	= function() {
+			for(var index = 0; index < triggers.length; ++index) {
+				triggers[index].checked && (activeTriggerIndex = index);
+			}
 		},
-		triggerSet			= {},
+		triggerSet				= {},
 		getTriggerSet			= function() {
-			activeTriggerIndex(function(data) {
-				triggerSet = {
-					p:		triggers[data-1] && triggers[data-1] || false,
-					a:		triggers[data] && triggers[data] || false,
-					n:		triggers[data+1] && triggers[data+1] || false
-				};
-			});
+			triggerSet = {
+				p:		triggers[activeTriggerIndex-1] && triggers[activeTriggerIndex-1] || false,
+				a:		triggers[activeTriggerIndex] && triggers[activeTriggerIndex] || false,
+				n:		triggers[activeTriggerIndex+1] && triggers[activeTriggerIndex+1] || false
+			};
 		},
-		slideSet			= {},
-		getSlideSet			= function() {
-			activeTriggerIndex(function(data) {
-				slideSet = {
-					p:		slides[data-1] && slides[data-1] || false,
-					a:		slides[data] && slides[data] || false,
-					n:		slides[data+1] && slides[data+1] || false
-				};
-			});
+		slideSet				= {},
+		getSlideSet				= function() {
+			slideSet = {
+				p:		slides[activeTriggerIndex-1] && slides[activeTriggerIndex-1] || false,
+				a:		slides[activeTriggerIndex] && slides[activeTriggerIndex] || false,
+				n:		slides[activeTriggerIndex+1] && slides[activeTriggerIndex+1] || false
+			};
 		},
-		setTranslateX		= function(object, translateX) {
+		setTranslateX			= function(object, translateX) {
 			if(object && translateX) {
 				object.style.transform = 'translate( ' + translateX + ' ,0)';
 			} else if(object && translateX === false) {
 				object.style.transform = '';
 			}
 		},
-		startLeftOffset		= 0,
-		lastLeftOffset		= 0,
-		movedPixels			= 0,
-		handleTouchStart = function(event) {
+		startLeftOffset			= 0,
+		lastLeftOffset			= 0,
+		movedPixels				= 0,
+		handleTouchStart		= function(event) {
 			var leftOffset = event.touches[0] && (event.touches[0].clientX - sliderGroupRect.left) || false;
 			startLeftOffset = leftOffset;
-			debug && console.log('start');
-			debug && console.log(startLeftOffset);
 			lastLeftOffset = leftOffset;
 		},
-		handleTouchMove = function(event) {
+		handleTouchMove		= function(event) {
 			var leftOffset = event.touches[0] && (event.touches[0].clientX - sliderGroupRect.left) || false;
 			if(leftOffset !== lastLeftOffset) {
 				movedPixels = leftOffset - startLeftOffset;
-				debug && console.log('move');
-				debug && console.log(movedPixels);
 				slideSet.p && slideSet.p.classList.add('drag');
 				setTranslateX(slideSet.p, (movedPixels - sliderGroupWidth) + 'px');
 				slideSet.a.classList.add('drag');
@@ -62,18 +54,15 @@ document.addEventListener('DOMContentLoaded', function () {
 				lastLeftOffset = leftOffset;
 			}
 		},
-		handleTouchEnd		= function(event) {
+		handleTouchEnd			= function(event) {
 			if(movedPixels < (sliderGroupWidth/2.5*-1)) {
-				console.log('next');
 				triggerSet.n && (triggerSet.n.checked = true);
 			} else if(movedPixels > sliderGroupWidth/2.5) {
-				console.log('prev');
 				triggerSet.p && (triggerSet.p.checked = true);
 			}
+			getActiveTriggerIndex();
 			getTriggerSet();
 			getSlideSet();
-			debug && console.log(triggerSet);
-			debug && console.log(slideSet);
 			slideSet.p && slideSet.p.classList.remove('drag');
 			setTranslateX(slideSet.p, false);
 			slideSet.a.classList.remove('drag');
@@ -86,18 +75,15 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	;
 
-	triggers.forEach(function(element) {
-		element.addEventListener('change', function() {
+	for(var index = 0; index < triggers.length; ++index) {
+		triggers[index].addEventListener('change', function() {
+			getActiveTriggerIndex();
 			getTriggerSet();
 			getSlideSet();
-			debug && console.log(triggerSet);
-			debug && console.log(slideSet);
 		});
-	});
+	}
 	getTriggerSet();
 	getSlideSet();
-	debug && console.log(triggerSet);
-	debug && console.log(slideSet);
 
 	sliderGroup.addEventListener("touchstart", handleTouchStart, false);
 	sliderGroup.addEventListener("touchmove", handleTouchMove, false);

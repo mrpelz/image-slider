@@ -1,6 +1,7 @@
 * {
 	margin: 0;
 	padding: 0;
+	touch-action: none;
 }
 
 body {
@@ -21,6 +22,7 @@ body {
 	width: 500px;
 	height: 300px;
 	overflow: hidden;
+	touch-action: pan-x;
 }
 
 .label {
