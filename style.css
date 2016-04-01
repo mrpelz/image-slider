@@ -59,6 +59,10 @@ body {
 	z-index: -1;
 }
 
+.slide.drag {
+	transition: none;
+}
+
 .trigger:checked + .label {
 	transform: translateX(-100%);
 }
