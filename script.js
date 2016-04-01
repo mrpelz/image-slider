@@ -12,17 +12,17 @@ document.addEventListener('DOMContentLoaded', function () {
 		triggerSet = {},
 		getTriggerSet = function() {
 			triggerSet = {
-				p:		triggers[activeTriggerIndex-1] && triggers[activeTriggerIndex-1] || false,
-				a:		triggers[activeTriggerIndex] && triggers[activeTriggerIndex] || false,
-				n:		triggers[activeTriggerIndex+1] && triggers[activeTriggerIndex+1] || false
+				p: triggers[activeTriggerIndex-1] || false,
+				a: triggers[activeTriggerIndex] || false,
+				n: triggers[activeTriggerIndex+1] || false
 			};
 		},
 		slideSet = {},
 		getSlideSet = function() {
 			slideSet = {
-				p:		slides[activeTriggerIndex-1] && slides[activeTriggerIndex-1] || false,
-				a:		slides[activeTriggerIndex] && slides[activeTriggerIndex] || false,
-				n:		slides[activeTriggerIndex+1] && slides[activeTriggerIndex+1] || false
+				p: slides[activeTriggerIndex-1] || false,
+				a: slides[activeTriggerIndex] || false,
+				n: slides[activeTriggerIndex+1] || false
 			};
 		},
 		update = function() {
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		},
 		handleTouchEnd = function(event) {
 			var sliderGroupWidth = sliderGroup.offsetWidth;
-			if(movedPixels < (sliderGroupWidth/2.5*-1)) {
+			if(movedPixels < sliderGroupWidth/2.5*-1) {
 				triggerSet.n && (triggerSet.n.checked = true);
 			} else if(movedPixels > sliderGroupWidth/2.5) {
 				triggerSet.p && (triggerSet.p.checked = true);
@@ -77,14 +77,12 @@ document.addEventListener('DOMContentLoaded', function () {
 			movedPixels			= 0;
 		}
 	;
-
 	for(var index = 0; index < triggers.length; ++index) {
 		triggers[index].addEventListener('change', function() {
 			update();
 		});
 	}
 	update();
-
 	sliderGroup.addEventListener("touchstart", handleTouchStart, false);
 	sliderGroup.addEventListener("touchmove", handleTouchMove, false);
 	sliderGroup.addEventListener("touchend", handleTouchEnd, false);
