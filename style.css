@@ -10,7 +10,7 @@ body {
 	display: flex;
 	justify-content:center;
 	align-items:center;
-	flex-direction: column;
+	flex-wrap: wrap;
 	font-family: sans-serif;
 }
 
@@ -20,7 +20,7 @@ body {
 
 .slider_group {
 	position: relative;
-	width: 100%;
+	width: 50%;
 	height: 50%;
 	overflow: hidden;
 	touch-action: pan-x;
