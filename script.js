@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-	var sliderGroups = document.querySelectorAll('.slider_group'),
+	var slideOver = 2.5,
+		sliderGroups = document.querySelectorAll('.slider_group'),
 		run = function(sliderGroup) {
 			var sliderGroupRect = sliderGroup.getBoundingClientRect(),
 				triggers = sliderGroup.querySelectorAll('.trigger'),
@@ -13,17 +14,17 @@ document.addEventListener('DOMContentLoaded', function () {
 				triggerSet = {},
 				getTriggerSet = function() {
 					triggerSet = {
-						p: triggers[activeTriggerIndex-1] || false,
-						a: triggers[activeTriggerIndex] || false,
-						n: triggers[activeTriggerIndex+1] || false
+						p: triggers[activeTriggerIndex-1],
+						a: triggers[activeTriggerIndex],
+						n: triggers[activeTriggerIndex+1]
 					};
 				},
 				slideSet = {},
 				getSlideSet = function() {
 					slideSet = {
-						p: slides[activeTriggerIndex-1] || false,
-						a: slides[activeTriggerIndex] || false,
-						n: slides[activeTriggerIndex+1] || false
+						p: slides[activeTriggerIndex-1],
+						a: slides[activeTriggerIndex],
+						n: slides[activeTriggerIndex+1]
 					};
 				},
 				update = function() {
@@ -42,12 +43,12 @@ document.addEventListener('DOMContentLoaded', function () {
 				lastLeftOffset = 0,
 				movedPixels = 0,
 				handleTouchStart = function(event) {
-					var leftOffset = event.touches[0] && (event.touches[0].clientX - sliderGroupRect.left) || false;
+					var leftOffset = event.touches[0].clientX - sliderGroupRect.left;
 					startLeftOffset = leftOffset;
 					lastLeftOffset = leftOffset;
 				},
 				handleTouchMove = function(event) {
-					var leftOffset = event.touches[0] && (event.touches[0].clientX - sliderGroupRect.left) || false;
+					var leftOffset = event.touches[0].clientX - sliderGroupRect.left;
 					if(leftOffset !== lastLeftOffset) {
 						movedPixels = leftOffset - startLeftOffset;
 						slideSet.p && slideSet.p.classList.add('drag');
@@ -61,9 +62,9 @@ document.addEventListener('DOMContentLoaded', function () {
 				},
 				handleTouchEnd = function(event) {
 					var sliderGroupWidth = sliderGroup.offsetWidth;
-					if(movedPixels < sliderGroupWidth/2.5*-1) {
+					if(movedPixels < sliderGroupWidth/slideOver*-1) {
 						triggerSet.n && (triggerSet.n.checked = true);
-					} else if(movedPixels > sliderGroupWidth/2.5) {
+					} else if(movedPixels > sliderGroupWidth/slideOver) {
 						triggerSet.p && (triggerSet.p.checked = true);
 					}
 					update();
@@ -73,9 +74,9 @@ document.addEventListener('DOMContentLoaded', function () {
 					setTranslateX(slideSet.a, false);
 					slideSet.n && slideSet.n.classList.remove('drag');
 					setTranslateX(slideSet.n, false);
-					startLeftOffset		= 0;
-					lastLeftOffset		= 0;
-					movedPixels			= 0;
+					startLeftOffset = 0;
+					lastLeftOffset = 0;
+					movedPixels = 0;
 				}
 			;
 			for(var index = 0; index < triggers.length; ++index) {
