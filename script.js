@@ -6,31 +6,22 @@ document.addEventListener('DOMContentLoaded', function () {
 				triggers = sliderGroup.querySelectorAll('.trigger'),
 				slides = sliderGroup.querySelectorAll('.slide'),
 				activeTriggerIndex = 0,
-				getActiveTriggerIndex = function() {
+				triggerSet = {},
+				slideSet = {},
+				update = function() {
 					for(var index = 0; index < triggers.length; ++index) {
 						triggers[index].checked && (activeTriggerIndex = index);
 					}
-				},
-				triggerSet = {},
-				getTriggerSet = function() {
 					triggerSet = {
 						p: triggers[activeTriggerIndex-1],
 						a: triggers[activeTriggerIndex],
 						n: triggers[activeTriggerIndex+1]
 					};
-				},
-				slideSet = {},
-				getSlideSet = function() {
 					slideSet = {
 						p: slides[activeTriggerIndex-1],
 						a: slides[activeTriggerIndex],
 						n: slides[activeTriggerIndex+1]
 					};
-				},
-				update = function() {
-					getActiveTriggerIndex();
-					getTriggerSet();
-					getSlideSet();
 				},
 				setTranslateX = function(object, translateX) {
 					if(object && translateX) {
@@ -39,6 +30,23 @@ document.addEventListener('DOMContentLoaded', function () {
 						object.style.transform = '';
 					}
 				},
+				setDrag = function(offset) {
+					if(offset) {
+						slideSet.p && slideSet.p.classList.add('drag');
+						setTranslateX(slideSet.p, 'calc(' + offset + 'px - 100%)');
+						slideSet.a.classList.add('drag');
+						setTranslateX(slideSet.a, offset + 'px');
+						slideSet.n && slideSet.n.classList.add('drag');
+						setTranslateX(slideSet.n, 'calc(' + offset + 'px + 100%)');
+					} else {
+						slideSet.p && slideSet.p.classList.remove('drag');
+						setTranslateX(slideSet.p, false);
+						slideSet.a.classList.remove('drag');
+						setTranslateX(slideSet.a, false);
+						slideSet.n && slideSet.n.classList.remove('drag');
+						setTranslateX(slideSet.n, false);
+					}
+				}
 				startLeftOffset = 0,
 				lastLeftOffset = 0,
 				movedPixels = 0,
@@ -53,12 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					if(leftOffset !== lastLeftOffset) {
 						movedPixels = leftOffset - startLeftOffset;
 						if((movedPixels < sliderGroupWidth) && (movedPixels > sliderGroupWidth*-1)) {
-							slideSet.p && slideSet.p.classList.add('drag');
-							setTranslateX(slideSet.p, 'calc(' + movedPixels + 'px - 100%)');
-							slideSet.a.classList.add('drag');
-							setTranslateX(slideSet.a, movedPixels + 'px');
-							slideSet.n && slideSet.n.classList.add('drag');
-							setTranslateX(slideSet.n, 'calc(' + movedPixels + 'px + 100%)');
+							setDrag(movedPixels);
 							lastLeftOffset = leftOffset;
 						}
 					}
@@ -71,12 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
 						triggerSet.p && (triggerSet.p.checked = true);
 					}
 					update();
-					slideSet.p && slideSet.p.classList.remove('drag');
-					setTranslateX(slideSet.p, false);
-					slideSet.a.classList.remove('drag');
-					setTranslateX(slideSet.a, false);
-					slideSet.n && slideSet.n.classList.remove('drag');
-					setTranslateX(slideSet.n, false);
+					setDrag(false);
 					startLeftOffset = 0;
 					lastLeftOffset = 0;
 					movedPixels = 0;
