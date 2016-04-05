@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
 						slideSet.n && slideSet.n.classList.remove('drag');
 						setTranslateX(slideSet.n, false);
 					}
-				}
+				},
 				startLeftOffset = 0,
 				lastLeftOffset = 0,
 				movedPixels = 0,
