@@ -60,8 +60,6 @@ document.addEventListener('DOMContentLoaded', function () {
 						sliderGroupWidth = sliderGroup.offsetWidth;
 					if(leftOffset !== lastLeftOffset) {
 						movedPixels = leftOffset - startLeftOffset;
-						console.log(sliderGroupWidth);
-						console.log(movedPixels);
 						if(movedPixels < sliderGroupWidth && movedPixels > sliderGroupWidth*-1) {
 							if((slideSet.p && startLeftOffset < leftOffset) || (slideSet.n && startLeftOffset > leftOffset)) {
 								setDrag(movedPixels);
