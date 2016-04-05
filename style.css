@@ -1,146 +1,152 @@
 * {
-	margin: 0;
-	padding: 0;
-	-ms-touch-action: none;
-		touch-action: none;
+    margin: 0;
+    padding: 0;
+    -ms-touch-action: none;
+    touch-action: none;
 }
 
 body {
-	width: 100vw;
-	height: 100vh;
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-pack:center;
-	-webkit-justify-content:center;
-		-ms-flex-pack:center;
-			justify-content:center;
-	-webkit-box-align:center;
-	-webkit-align-items:center;
-		-ms-flex-align:center;
-			align-items:center;
-	-webkit-flex-wrap: wrap;
-		-ms-flex-wrap: wrap;
-			flex-wrap: wrap;
-	font-family: sans-serif;
+    width: 100vw;
+    height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    font-family: sans-serif;
 }
 
 .trigger {
-	display: none;
+    display: none;
 }
 
 .slider_group {
-	position: relative;
-	width: 50%;
-	height: 50%;
-	overflow: hidden;
-	-ms-touch-action: pan-x;
-		touch-action: pan-x;
+    position: relative;
+    width: 50%;
+    height: 50%;
+    overflow: hidden;
+    -ms-touch-action: pan-x;
+    touch-action: pan-x;
 }
 
 .label {
-	position: absolute;
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-pack:center;
-	-webkit-justify-content:center;
-		-ms-flex-pack:center;
-			justify-content:center;
-	-webkit-box-align:center;
-	-webkit-align-items:center;
-		-ms-flex-align:center;
-			align-items:center;
-	top: 50%;
-	-webkit-transform: translateY(-50%);
-		-ms-transform: translateY(-50%);
-			transform: translateY(-50%);
-	background: #000;
-	color: #fff;
-	width: 40px;
-	height: 40px;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	z-index: 2;
-	-webkit-font-smoothing: subpixel-antialiased;
+    position: absolute;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    background: #000;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    z-index: 2;
+    -webkit-font-smoothing: subpixel-antialiased;
 }
+
 .label:after {
-	content: '←';
+    content: '←';
 }
 
 .slide {
-	list-style: none;
-	display:-webkit-box;
-	display:-webkit-flex;
-	display:-ms-flexbox;
-	display:flex;
-	-webkit-box-pack:center;
-	-webkit-justify-content:center;
-		-ms-flex-pack:center;
-			justify-content:center;
-	-webkit-box-align:center;
-	-webkit-align-items:center;
-		-ms-flex-align:center;
-			align-items:center;
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-	-webkit-transform: translateX(-100%);
-		-ms-transform: translateX(-100%);
-			transform: translateX(-100%);
-	pointer-events: none;
-	-webkit-transition: -webkit-transform 0.35s ease-out;
-			transition: transform 0.35s ease-out;
-	z-index: -1;
+    list-style: none;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    -webkit-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+    pointer-events: none;
+    -webkit-transition: -webkit-transform 0.35s ease-out;
+    transition: transform 0.35s ease-out;
+    z-index: -1;
 }
 
 .slide.drag {
-	-webkit-transition: none;
-			transition: none;
+    -webkit-transition: none;
+    transition: none;
 }
 
 .image {
-	-webkit-flex-shrink:0;
-		-ms-flex-negative:0;
-			flex-shrink:0;
-	min-width:100%;
-	min-height:100%
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%;
 }
 
 .trigger:checked + .label {
-	-webkit-transform: translateX(-100%);
-		-ms-transform: translateX(-100%);
-			transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
 }
+
 .trigger:checked + .label + .slide {
-	-webkit-transform: translateX(0);
-		-ms-transform: translateX(0);
-			transform: translateX(0);
-	pointer-events: all;
-	z-index: 1;
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+    pointer-events: all;
+    z-index: 1;
 }
+
 .trigger:checked + .label + .slide + .trigger + .label {
-	right: 0;
+    right: 0;
 }
+
 .trigger:checked + .label + .slide + .trigger + .label:after {
-	content: '→';
+    content: '→';
 }
+
 .trigger:checked + .label + .slide + .trigger ~ .slide {
-	-webkit-transform: translateX(100%);
-		-ms-transform: translateX(100%);
-			transform: translateX(100%);
-	z-index: -2;
+    -webkit-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%);
+    z-index: -2;
 }
+
 .trigger:checked + .label + .slide + .trigger + .label + .slide + .trigger ~ .label {
-	right: 0;
-	-webkit-transform: translateX(100%);
-		-ms-transform: translateX(100%);
-			transform: translateX(100%);
+    right: 0;
+    -webkit-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%);
 }
