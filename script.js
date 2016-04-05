@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-	var slideOver = 2.5,
+	var slideThreshold = 2.5,
 		sliderGroups = document.querySelectorAll('.slider_group'),
 		run = function(sliderGroup) {
 			var sliderGroupRect = sliderGroup.getBoundingClientRect(),
@@ -48,23 +48,26 @@ document.addEventListener('DOMContentLoaded', function () {
 					lastLeftOffset = leftOffset;
 				},
 				handleTouchMove = function(event) {
-					var leftOffset = event.touches[0].clientX - sliderGroupRect.left;
+					var leftOffset = event.touches[0].clientX - sliderGroupRect.left,
+						sliderGroupWidth = sliderGroup.offsetWidth;
 					if(leftOffset !== lastLeftOffset) {
 						movedPixels = leftOffset - startLeftOffset;
-						slideSet.p && slideSet.p.classList.add('drag');
-						setTranslateX(slideSet.p, 'calc(' + movedPixels + 'px - 100%)');
-						slideSet.a.classList.add('drag');
-						setTranslateX(slideSet.a, movedPixels + 'px');
-						slideSet.n && slideSet.n.classList.add('drag');
-						setTranslateX(slideSet.n, 'calc(' + movedPixels + 'px + 100%)');
-						lastLeftOffset = leftOffset;
+						if((movedPixels < sliderGroupWidth) && (movedPixels > sliderGroupWidth*-1)) {
+							slideSet.p && slideSet.p.classList.add('drag');
+							setTranslateX(slideSet.p, 'calc(' + movedPixels + 'px - 100%)');
+							slideSet.a.classList.add('drag');
+							setTranslateX(slideSet.a, movedPixels + 'px');
+							slideSet.n && slideSet.n.classList.add('drag');
+							setTranslateX(slideSet.n, 'calc(' + movedPixels + 'px + 100%)');
+							lastLeftOffset = leftOffset;
+						}
 					}
 				},
 				handleTouchEnd = function(event) {
 					var sliderGroupWidth = sliderGroup.offsetWidth;
-					if(movedPixels < sliderGroupWidth/slideOver*-1) {
+					if(movedPixels < sliderGroupWidth/slideThreshold*-1) {
 						triggerSet.n && (triggerSet.n.checked = true);
-					} else if(movedPixels > sliderGroupWidth/slideOver) {
+					} else if(movedPixels > sliderGroupWidth/slideThreshold) {
 						triggerSet.p && (triggerSet.p.checked = true);
 					}
 					update();
