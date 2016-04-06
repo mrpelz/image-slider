@@ -60,10 +60,14 @@ document.addEventListener('DOMContentLoaded', function () {
 						sliderGroupWidth = sliderGroup.offsetWidth;
 					if(leftOffset !== lastLeftOffset) {
 						movedPixels = leftOffset - startLeftOffset;
-						if(movedPixels < sliderGroupWidth && movedPixels > sliderGroupWidth*-1) {
-							if((slideSet.p && startLeftOffset < leftOffset) || (slideSet.n && startLeftOffset > leftOffset)) {
+						if((slideSet.p && startLeftOffset < leftOffset) || (slideSet.n && startLeftOffset > leftOffset)) {
+							if(movedPixels < sliderGroupWidth && movedPixels > sliderGroupWidth*-1) {
 								setDrag(movedPixels);
 								lastLeftOffset = leftOffset;
+							} else if(startLeftOffset < leftOffset) {
+								setDrag(sliderGroupWidth);
+							} else {
+								setDrag(sliderGroupWidth*-1);
 							}
 						}
 					}
